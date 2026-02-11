@@ -32,8 +32,9 @@ def binary_classification(n, d, epochs=10000, lr=0.001):
         A1 = torch.sigmoid(Z1.mm(W2))
         Z2 = A1.mm(W3)
         A2 = torch.sigmoid(Z2.mm(W4))
-
-        loss = -(Y * torch.log(A2) + (1 - Y) * torch.log(1 - A2)).sum()
+        eps = 1e-8
+        A2 = torch.clamp(A2, eps, 1 - eps)
+        loss = -(Y * torch.log(A2) + (1 - Y) * torch.log(1 - A2)).mean()
         loss_history.append(loss.item())
 
         # Backward pass

@@ -11,6 +11,8 @@ python scripts/binaryclassification_impl.py
 
 # HW02Q7
 ```
+git clone https://github.com/Purplegh/cpe487587HW
+cd cpe487587HW
 source .venv/bin/activate
 uv sync
 uv build
