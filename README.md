@@ -41,7 +41,7 @@ cd cpe487587HW
 source .venv/bin/activate
 uv sync
 uv build
-uv pip install scikit-learn pandas numpy matplotlib manim onnxruntime pillow
+uv pip install scikit-learn pandas numpy matplotlib manim onnxruntime pillow datasets
 ```
 
 
