@@ -126,3 +126,69 @@ python scripts/acc_inference.py \
     --norm_coeffs scripts/acc_norm_coeffs.npz
 
 ```    
+
+# HW04 
+
+## Setup
+
+```bash
+git clone https://github.com/Purplegh/cpe487587HW
+cd cpe487587HW
+uv venv --python 3.12
+source .venv/bin/activate
+uv sync
+uv build
+uv pip install onnx onnxruntime scikit-image numpy matplotlib pillow torch torchvision
+```
+
+## Train All Models + Run Inference
+
+```bash
+nohup bash genmodel_impl.sh --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10 > genmodel.log 2>&1 &
+```
+
+Monitor progress:
+```bash
+tail -f genmodel.log
+```
+
+## CLI Arguments
+
+| Argument | Default | Description |
+|---|---|---|
+| `--epochs` | `50` | Number of training epochs |
+| `--train_ratio` | `0.9` | Fraction of data used for training |
+| `--data_ratio` | `1.0` | Fraction of full CelebA dataset to use |
+| `--onnx_every` | `10` | Save ONNX checkpoint every X epochs |
+
+## Train Individual Models
+
+```bash
+python scripts/genmodel_impl.py --model vae --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10
+python scripts/genmodel_impl.py --model gan --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10
+python scripts/genmodel_impl.py --model diffusion --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10
+```
+
+## Run Inference
+
+```bash
+python scripts/genmodel_infer.py --save_dir checkpoints --out_dir results
+```
+
+## Output Files
+
+- `checkpoints/vae_epoch*_final.onnx` — trained VAE model
+- `checkpoints/gan_epoch*_final.onnx` — trained GAN model
+- `checkpoints/diffusion_epoch*_final.onnx` — trained Diffusion model
+- `results/vae_samples.png` — 25 generated VAE images
+- `results/gan_samples.png` — 25 generated GAN images
+- `results/diffusion_samples.png` — 25 generated Diffusion images
+- `results/metrics_comparison.png` — boxplot comparing all 5 metrics
+- `results/metrics_raw.csv` — raw metric scores
+
+## Dataset
+
+CelebA dataset is available on Lovelace at:
+```
+/data/CPE_487-587/img_align_celeba.zip
+```
