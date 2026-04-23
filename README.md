@@ -186,9 +186,3 @@ python scripts/genmodel_infer.py --save_dir checkpoints --out_dir results
 - `results/metrics_comparison.png` — boxplot comparing all 5 metrics
 - `results/metrics_raw.csv` — raw metric scores
 
-## Dataset
-
-CelebA dataset is available on Lovelace at:
-```
-/data/CPE_487-587/img_align_celeba.zip
-```
