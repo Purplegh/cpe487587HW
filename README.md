@@ -138,7 +138,7 @@ uv venv --python 3.12
 source .venv/bin/activate
 uv sync
 uv build
-uv pip install onnx onnxruntime onnxscript scikit-learn scikit-image pandas numpy matplotlib pillow manim
+uv pip install torch torchvision onnx onnxruntime onnxscript scikit-learn scikit-image pandas numpy matplotlib pillow manim
 ```
 
 ## Train All Models + Run Inference
