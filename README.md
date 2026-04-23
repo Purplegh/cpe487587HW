@@ -138,13 +138,13 @@ uv venv --python 3.12
 source .venv/bin/activate
 uv sync
 uv build
-uv pip install onnx onnxruntime scikit-image numpy matplotlib pillow torch torchvision
+uv pip install onnx onnxruntime onnxscript scikit-learn scikit-image pandas numpy matplotlib pillow manim
 ```
 
 ## Train All Models + Run Inference
 
 ```bash
-nohup bash genmodel_impl.sh --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10 > genmodel.log 2>&1 &
+nohup bash genmodel_impl.sh --epochs 100 --train_ratio 0.9 --data_ratio 0.02 --onnx_every 10 > genmodel.log 2>&1 &
 ```
 
 Monitor progress:
@@ -164,9 +164,9 @@ tail -f genmodel.log
 ## Train Individual Models
 
 ```bash
-python scripts/genmodel_impl.py --model vae --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10
-python scripts/genmodel_impl.py --model gan --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10
-python scripts/genmodel_impl.py --model diffusion --epochs 100 --train_ratio 0.9 --data_ratio 1.0 --onnx_every 10
+python scripts/genmodel_impl.py --model vae --epochs 100 --train_ratio 0.9 --data_ratio 0.02 --onnx_every 10
+python scripts/genmodel_impl.py --model gan --epochs 100 --train_ratio 0.9 --data_ratio 0.02 --onnx_every 10
+python scripts/genmodel_impl.py --model diffusion --epochs 100 --train_ratio 0.9 --data_ratio 0.02 --onnx_every 10
 ```
 
 ## Run Inference
